@@ -5,9 +5,13 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
-<h1><%= "Hello World!" %>
+<center>
+<h1><%= "Hello World" %>
 </h1>
 <br/>
-<a href="hello-servlet">Hello Servlet</a>
+<p>This is the whale</p>
+<img src="images/whale.jpg" width="300">
+<p><a href="hello-servlet">Go to static html</a></p>
+<p><a href ="https://github.com/AnatoIii/Planner">Our repository</a></p>
 </body>
 </html>
