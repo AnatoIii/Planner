@@ -1,0 +1,63 @@
+@import "global.css";
+
+.wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+.left-side {
+    border-right: 1px solid grey;
+    flex: 2;
+    padding: 25px;
+}
+
+.month-title,
+.hint {
+    margin: 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px solid grey;
+    width: calc(100%/7);
+}
+
+th {
+    height: 40px;
+    background: #f3f6f7
+}
+
+td {
+    vertical-align: baseline;
+    height: 150px;
+}
+
+td:hover {
+    background-color: #edf4f5;
+    cursor: pointer;
+    transform: scale(1.001);
+}
+
+.day-number {
+    display: flex;
+    justify-content: flex-end;
+    padding: 2px 5px;
+    font-size: 18px;
+}
+
+.right-side {
+    min-width: 25%;
+    padding-top: 25px;
+    background-color: #f3f6f7;
+}
+
+.hint {
+    text-align: center;
+    color: grey;
+}
+
