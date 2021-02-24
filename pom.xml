@@ -6,7 +6,7 @@
 
     <groupId>com.weirdsoft</groupId>
     <artifactId>Planner</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>Planner</name>
     <packaging>war</packaging>
 

@@ -38,7 +38,7 @@ td {
 }
 
 td:hover {
-    background-color: #edf4f5;
+    background-color: #edf4f552;
     cursor: pointer;
     transform: scale(1.001);
 }
@@ -51,7 +51,7 @@ td:hover {
 }
 
 .right-side {
-    min-width: 25%;
+    width: 25%;
     padding-top: 25px;
     background-color: #f3f6f7;
 }
@@ -61,3 +61,42 @@ td:hover {
     color: grey;
 }
 
+.note p {
+    margin: 3px;
+}
+
+.note > p {
+    display: flex;
+    align-items: center;
+}
+
+.name {
+    font-weight: bold;
+    font-size: 15px;
+    padding-left: 5px; 
+}
+
+.time {
+    color: #666666;
+    font-size: 13px;
+    font-weight: bold;
+    padding-right: 5px; 
+}
+
+.right-side .note {
+    margin: 15px;
+    background: white;
+    padding: 10px;
+}
+
+.right-side .time{
+    font-size: 15px;
+}
+
+.right-side .name{
+    font-size: 17px;
+}
+
+.descr {
+    margin-top: 8px;
+}
