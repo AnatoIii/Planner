@@ -34,7 +34,7 @@ th {
 
 td {
     vertical-align: baseline;
-    height: 150px;
+    height: calc(100vh / 6.5);
 }
 
 td:hover {
