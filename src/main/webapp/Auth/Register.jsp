@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Login
-    Created on : Feb 17, 2021, 11:12:30 PM
+    Document   : Register
+    Created on : Mar 2, 2021, 11:12:30 PM
     Author     : anatolii
 --%>
 
@@ -13,19 +13,23 @@
             <%@include file="/styles.css"%>
         </style>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <title>Login | Planner</title>
+        <title>Register | Planner</title>
     </head>
     <body>
         <div class="name">
             <h3>Planner</h3>
         </div>
-        <div class="login_form">
+        <div class="register_form">
             <div class="header">
-                <h3>Log in</h3>
+                <h3>Register</h3>
             </div>
-            <div class="login">
-                <div class="login-card">
+            <div class="register">
+                <div class="register-card">
                     <form class="flex-center flex-column" [formGroup]="loginForm" action="login" method="POST">
+                        <div class="email">
+                            <div class="label"><label for="name">Name</label></div>
+                            <input id="name" name="name" type="text" placeholder="Enter email">
+                        </div>
                         <div class="email">
                             <div class="label"><label for="email">Email</label></div>
                             <input id="email" name="email" type="text" placeholder="Enter email">
@@ -33,6 +37,10 @@
                         <div class="password">
                             <div class="label">Password</div>
                             <input id="password" name="password" type="password" placeholder="Enter password">
+                        </div>
+                        <div class="password">
+                            <div class="label">Confirm password</div>
+                            <input id="passwordConfirm" name="confirmPassword" type="password" placeholder="Enter password">
                         </div>
                         <div class="error">
                             <%= request.getAttribute("error") %>
@@ -45,7 +53,7 @@
             </div>
 
             <div class="toRegister">
-                <a href="/register">Create an account</a>
+                <a href="/login">Already have an account? Login</a>
             </div>
         </div>
     </body>

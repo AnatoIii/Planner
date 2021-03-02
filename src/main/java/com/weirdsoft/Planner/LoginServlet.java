@@ -30,6 +30,8 @@ public class LoginServlet extends HttpServlet {
         String destPage = "Auth/Success.jsp";
         if (!email.equals("admin"))
         {
+            HttpSession session = request.getSession();
+            
             destPage = "Auth/Login.jsp";
             request.setAttribute("error", "Incorrect email / password");
         }
