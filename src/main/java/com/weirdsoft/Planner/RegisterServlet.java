@@ -6,16 +6,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
-@WebServlet(name = "helloServlet", value = "/hello-servlet")
-public class HelloServlet extends HttpServlet {
-    private String message;
+@WebServlet(name = "Register", value = "/register")
+public class RegisterServlet extends HttpServlet {
 
     public void init() {
-        message = "It is servlet";
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        RequestDispatcher view = request.getRequestDispatcher("newhtml.html");
+        request.setAttribute("error", "");
+        
+        RequestDispatcher view = request.getRequestDispatcher("Auth/Register.jsp");
         view.forward(request, response);
     }
 

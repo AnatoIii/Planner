@@ -1,0 +1,119 @@
+body {
+    display: block;
+    height: 100vh;
+    background: url('/images/login_background.jpg') center;
+    background-size: 100% 100%;
+    overflow: hidden;
+}
+
+.name {
+    color: white;
+    text-align: center;
+    padding-top: 40px;
+}
+.name h3 {
+    font-size: 48px;
+}
+
+.login_form, .register_form {
+    width: 100%;
+    position: fixed;
+    bottom: calc(50vh - 110px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.register_form {
+    bottom: calc(50vh - 240px);
+}
+
+.login_form .header, .register_form .header {
+    opacity: 1;
+    margin-top: -40px;
+    margin-bottom: 10px;
+}
+
+.login_form .header h3, .register_form .header h3 {
+    font-size: 36px;
+    color: #BC4123;
+    cursor: default;
+    font-weight: 300;
+}
+
+.login, .register {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 3px;
+    border: 3px solid #BC4123;
+    padding-top: 10px;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-left: 35px;
+    height: 14px;
+}
+
+.email, .password {
+    margin: 20px 35px 0 35px;
+}
+
+.email input, .password input {
+    width: 100%;
+    border: none;
+    padding-bottom: 5px;
+    border-bottom: 1px solid black;
+    background: none;
+    outline: none;
+}
+
+.login .login-card .label, .register .register-card .label {
+    display: block;
+    color: black;
+    font-size: 12px;
+    margin-bottom: 3px;
+    font-weight: bold;
+}
+
+.toRegister {
+    margin-top: 10px;
+}
+
+.toRegister a {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.toRegister a:hover {
+    text-decoration: none
+}
+
+.login-card, .register-card {
+    width: 350px;
+    margin: 0 auto;
+}
+
+.login-card button, .register-card button {
+    margin: 10px;
+    width: 150px;
+    background-color: #463940;
+    color: white;
+    cursor: pointer;
+    border-style: none;
+    margin: 10px;
+    padding: 10px;
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    outline: none;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0 20px 0;
+}
+
+.login-card button:hover {
+    background-color: #564950;
+}

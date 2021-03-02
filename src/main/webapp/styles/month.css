@@ -1,0 +1,102 @@
+@import "global.css";
+
+.wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+.left-side {
+    border-right: 1px solid grey;
+    flex: 2;
+    padding: 25px;
+}
+
+.month-title,
+.hint {
+    margin: 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px solid grey;
+    width: calc(100%/7);
+}
+
+th {
+    height: 40px;
+    background: #f3f6f7
+}
+
+td {
+    vertical-align: baseline;
+    height: calc(100vh / 6.5);
+}
+
+td:hover {
+    background-color: #edf4f552;
+    cursor: pointer;
+    transform: scale(1.001);
+}
+
+.day-number {
+    display: flex;
+    justify-content: flex-end;
+    padding: 2px 5px;
+    font-size: 18px;
+}
+
+.right-side {
+    width: 25%;
+    padding-top: 25px;
+    background-color: #f3f6f7;
+}
+
+.hint {
+    text-align: center;
+    color: grey;
+}
+
+.note p {
+    margin: 3px;
+}
+
+.note > p {
+    display: flex;
+    align-items: center;
+}
+
+.name {
+    font-weight: bold;
+    font-size: 15px;
+    padding-left: 5px; 
+}
+
+.time {
+    color: #666666;
+    font-size: 13px;
+    font-weight: bold;
+    padding-right: 5px; 
+}
+
+.right-side .note {
+    margin: 15px;
+    background: white;
+    padding: 10px;
+}
+
+.right-side .time{
+    font-size: 15px;
+}
+
+.right-side .name{
+    font-size: 17px;
+}
+
+.descr {
+    margin-top: 8px;
+}
