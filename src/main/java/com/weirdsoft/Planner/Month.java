@@ -1,9 +1,9 @@
 package com.weirdsoft.Planner;
 
-
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -42,8 +42,12 @@ public class Month {
     public int getStartDay() {
         return startDay;
     }
-    
+
     public String getDisplayText() {
         return YearMonth.of(year, month).format(DateTimeFormatter.ofPattern("MMMM yyyy", new Locale("en")));
+    }
+
+    public String getValueForInput() {
+        return YearMonth.of(year, month).format(DateTimeFormatter.ofPattern("yyyy-MM", new Locale("en")));
     }
 }

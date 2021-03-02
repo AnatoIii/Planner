@@ -1,8 +1,8 @@
 @import "global.css";
 
 .wrapper {
-    display: flex;
-    min-height: 100vh;
+    margin: 0 auto;
+    padding: 30px 60px 0;
 }
 
 .top {
