@@ -5,6 +5,12 @@
     min-height: 100vh;
 }
 
+.top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
 .left-side {
     border-right: 1px solid grey;
     flex: 2;

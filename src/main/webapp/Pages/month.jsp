@@ -14,11 +14,23 @@
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
         <link href="./styles/month.css" rel="stylesheet" type="text/css">
         <title>Month page</title>
+
+        <script>
+            function onChangeDate(e)
+            {
+                console.log(e.target.value);
+            }
+        </script>
     </head>
     <body>
         <div class="wrapper">
             <div class="left-side">
-                <h1 class="month-title">${month.getDisplayText()}</h1>
+                <div class="top">
+                    <h1 class="month-title">${month.getDisplayText()}</h1>
+                    <input type="month" id="start" name="start"
+                           min="2020-01" value="2021-03" onchange="onChangeDate(event)">
+                </div>
+
                 <table>
                     <tr>
                         <c:forEach items="${days}" var="day">
