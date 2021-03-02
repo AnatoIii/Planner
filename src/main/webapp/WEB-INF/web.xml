@@ -9,6 +9,11 @@
         <url-pattern>/month</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
-        <welcome-file>month.jsp</welcome-file>
+        <welcome-file>Auth/Login.jsp</welcome-file>
     </welcome-file-list>
+    
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error.html</location>
+    </error-page>
 </web-app>

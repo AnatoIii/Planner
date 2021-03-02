@@ -15,7 +15,7 @@ body {
     font-size: 48px;
 }
 
-.login_form {
+.login_form, .register_form {
     width: 100%;
     position: fixed;
     bottom: calc(50vh - 110px);
@@ -25,20 +25,24 @@ body {
     margin-bottom: 10px;
 }
 
-.login_form .loginText {
+.register_form {
+    bottom: calc(50vh - 240px);
+}
+
+.login_form .header, .register_form .header {
     opacity: 1;
     margin-top: -40px;
     margin-bottom: 10px;
 }
 
-.login_form .loginText h3 {
+.login_form .header h3, .register_form .header h3 {
     font-size: 36px;
     color: #BC4123;
     cursor: default;
     font-weight: 300;
 }
 
-.login {
+.login, .register {
     background: rgba(255, 255, 255, 0.8);
     border-radius: 3px;
     border: 3px solid #BC4123;
@@ -65,7 +69,7 @@ body {
     outline: none;
 }
 
-.login .login-card .label {
+.login .login-card .label, .register .register-card .label {
     display: block;
     color: black;
     font-size: 12px;
@@ -85,12 +89,12 @@ body {
     text-decoration: none
 }
 
-.login-card {
+.login-card, .register-card {
     width: 350px;
     margin: 0 auto;
 }
 
-.login-card button {
+.login-card button, .register-card button {
     margin: 10px;
     width: 150px;
     background-color: #463940;
