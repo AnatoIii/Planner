@@ -24,6 +24,7 @@ public class LoginServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
                 
+        request.setAttribute("error", "");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         

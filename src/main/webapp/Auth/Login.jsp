@@ -35,7 +35,7 @@
                             <input id="password" name="password" type="password" placeholder="Enter password">
                         </div>
                         <div class="error">
-                            <%= request.getAttribute("error") %>
+                            <%= request.getAttribute("error") != null ? request.getAttribute("error") : "" %>
                         </div>
                         <div class="button-container">
                             <button type="submit" id="login_button">Login</button>
