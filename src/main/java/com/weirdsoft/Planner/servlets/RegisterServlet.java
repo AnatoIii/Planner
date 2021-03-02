@@ -1,4 +1,4 @@
-package com.weirdsoft.Planner;
+package com.weirdsoft.Planner.servlets;
 
 import java.io.*;
 import javax.servlet.RequestDispatcher;
@@ -6,21 +6,22 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
-@WebServlet(name = "Login", value = "/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "Register", value = "/register")
+public class RegisterServlet extends HttpServlet {
 
+    @Override
     public void init() {
     }
 
+    @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
-        
         request.setAttribute("error", "");
         
-        RequestDispatcher view = request.getRequestDispatcher("Auth/Login.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("Auth/Register.jsp");
         view.forward(request, response);
     }
-    
+
+    @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
                 
@@ -33,14 +34,11 @@ public class LoginServlet extends HttpServlet {
         {
             HttpSession session = request.getSession();
             
-            destPage = "Auth/Login.jsp";
+            destPage = "Auth/Register.jsp";
             request.setAttribute("error", "Incorrect email / password");
         }
         
         RequestDispatcher view = request.getRequestDispatcher(destPage);
         view.forward(request, response);
-    }
-
-    public void destroy() {
     }
 }
