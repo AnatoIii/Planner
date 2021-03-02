@@ -15,14 +15,25 @@ and open the template in the editor.
                 width: 100%;
                 height: 100vh;
                 display: flex;
+                flex-direction: column;
                 align-items: center;
                 justify-content: center;
                 font-size: 36px;
                 font-weight: bold;
+                background: #141414;
+                color: #cccccc;
+            }
+            
+            .error p:first-child {
+                font-size: 64px;
+                color: #BC4123;
             }
         </style>
     </head>
     <body>
-        <div class="error">Resource not found</div>
+        <div class="error">
+            <p>404</p>
+            <p>Resource not found</p>
+        </div>
     </body>
 </html>

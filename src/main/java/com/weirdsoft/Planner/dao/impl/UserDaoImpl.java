@@ -11,6 +11,7 @@ import java.util.UUID;
 
 public class UserDaoImpl implements UserDao {
     private static final String getByIdSql = "select userid, name, login, passwordHash, salt from Users where userId = ?";
+    private static final String getByLoginSql = "select userid, name, login, passwordHash, salt from Users where login = ?";
     private static final String deleteByIdSql = "delete from Users where userId = ? RETURNING userId ";
     private static final String createSql = "insert into Users(userId, name, login, passwordHash, salt) VALUES (?, ?, ?, ?, ?) RETURNING userId";
     private static final String updateSql = "update Users set salt=? WHERE userId=? RETURNING userId";
@@ -20,7 +21,7 @@ public class UserDaoImpl implements UserDao {
         return DaoUtils.executeAndMap(getByIdSql, UserMapper::mapUser, (ps) -> {
             try {
                 ps.setString(1, id.toString());
-            } catch (Exception e) {
+            } catch (SQLException e) {
 
             }
         });
@@ -57,6 +58,17 @@ public class UserDaoImpl implements UserDao {
                 ps.setString(2, object.getUserId().toString());
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
+            }
+        });
+    }
+
+    @Override
+    public User getUserByLogin(String login) {        
+        return DaoUtils.executeAndMap(getByLoginSql, UserMapper::mapUser, (ps) -> {
+            try {
+                ps.setString(1, login);
+            } catch (SQLException e) {
+
             }
         });
     }

@@ -1,71 +1,93 @@
 package com.weirdsoft.Planner.services.impl;
 
-import com.weirdsoft.Planner.dao.NoteDao;
-import com.weirdsoft.Planner.models.Note;
-import com.weirdsoft.Planner.models.dtos.NoteTO;
-import com.weirdsoft.Planner.services.NoteService;
+import com.weirdsoft.Planner.dao.UserDao;
+import com.weirdsoft.Planner.models.User;
+import com.weirdsoft.Planner.services.UserService;
+import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 import javax.inject.Inject;
-import javax.transaction.Transactional;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 
-public class NoteServiceImpl implements NoteService {
-    private NoteDao noteDao;
+public class UserServiceImpl implements UserService {
+    private final UserDao userDao;
 
     @Inject
-    public NoteServiceImpl(NoteDao noteDao) {
-        this.noteDao = noteDao;
+    public UserServiceImpl(UserDao userDao) {
+        this.userDao = userDao;
     }
 
     @Override
-    public NoteTO getById(UUID id) {
-        return convert2TO(noteDao.find(id));
+    public User Login(String login, String password) {
+        User user = userDao.getUserByLogin(login);
+        
+        if (user == null) {
+            return null; // Incorrect login
+        }
+        
+        byte[] salt = user.getSalt().getBytes();
+        
+        try {
+            byte[] hashedPassword = hashPassword(password, salt);
+            
+            if (!new String(hashedPassword).equals(user.getPasswordHash())) {
+                return null;
+            }
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidKeySpecException ex) {
+            Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return user;
     }
 
     @Override
-    public List<NoteTO> getByDate(Date date) {
-        return null;
-    }
+    public User Register(String name, String login, String password) {
+        User userExists = userDao.getUserByLogin(login);
+        if (userExists != null) {
+            return null;
+        }
+        
+        User user = new User();
+        user.setLogin(login);
+        user.setName(name);
 
-    @Override
-    public List<NoteTO> getByMonth(Date date) {
-        return null;
+        byte[] salt = generateSalt();
+        
+        byte[] passwordHash = new byte[0];
+        try {
+            passwordHash = hashPassword(password, salt);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidKeySpecException ex) {
+            Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        user.setSalt(new String(salt));
+        user.setPasswordHash(new String(passwordHash));
+        
+        User registered = userDao.create(user);
+        return registered;
     }
-
-    @Override
-    public NoteTO createNote(NoteTO noteTO) {
-        Note note = convert2dao(noteTO);
-        Note newNote = noteDao.create(note);
-        return convert2TO(newNote);
+    
+    private byte[] generateSalt() {
+        SecureRandom random = new SecureRandom();
+        byte[] salt = new byte[16];
+        random.nextBytes(salt);
+        
+        return salt;
     }
-
-    @Override
-    public UUID deleteNote(UUID id) {
-        return noteDao.delete(id);
-    }
-
-    @Override
-    public UUID updateNote(NoteTO note) {
-        return noteDao.update(convert2dao(note));
-    }
-
-    private static NoteTO convert2TO(Note note){
-        NoteTO noteTO = new NoteTO();
-        noteTO.setNoteId(note.getNoteId());
-        noteTO.setName(note.getName());
-        noteTO.setDescription(note.getDescription());
-        noteTO.setDateTime(note.getDateTime());
-        return noteTO;
-    }
-
-    private static Note convert2dao(NoteTO noteTO){
-        Note note = new Note();
-        note.setNoteId(noteTO.getNoteId());
-        note.setName(noteTO.getName());
-        note.setDescription(noteTO.getDescription());
-        note.setDateTime(noteTO.getDateTime());
-        return note;
+    
+    private byte[] hashPassword(String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+        
+        return  factory.generateSecret(spec).getEncoded();
     }
 }

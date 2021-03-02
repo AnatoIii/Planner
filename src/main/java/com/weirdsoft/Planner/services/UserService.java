@@ -1,16 +1,8 @@
 package com.weirdsoft.Planner.services;
 
-import com.weirdsoft.Planner.models.dtos.NoteTO;
+import com.weirdsoft.Planner.models.User;
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
-
-public interface NoteService {
-    NoteTO getById(UUID id);
-    List<NoteTO> getByDate(Date date);
-    List<NoteTO> getByMonth(Date date);
-    NoteTO createNote(NoteTO note);
-    UUID deleteNote(UUID id);
-    UUID updateNote(NoteTO note);
+public interface UserService {
+    User Login(String login, String password);
+    User Register(String name, String login, String password);
 }
