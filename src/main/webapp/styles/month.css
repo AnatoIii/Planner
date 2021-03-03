@@ -1,8 +1,14 @@
 @import "global.css";
 
 .wrapper {
+    margin: 0 auto;
+    padding: 30px 60px 0;
+}
+
+.top {
     display: flex;
-    min-height: 100vh;
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
 
 .left-side {

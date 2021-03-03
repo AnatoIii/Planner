@@ -1,6 +1,6 @@
 package com.weirdsoft.Planner;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -12,13 +12,14 @@ public class Note {
     String name;
     String description;
     String time;
-    Date date;
+    LocalDate date;
     String creatorId;
 
-    public Note(String noteName, String noteDescription, String noteTime) {
+    public Note(String noteName, String noteDescription, String noteTime, LocalDate noteDate) {
         name = noteName;
         description = noteDescription;
         time = noteTime;
+        date = noteDate;
     }
 
     public String getName() {
@@ -31,5 +32,9 @@ public class Note {
 
     public String getTime() {
         return time;
+    }
+
+    public LocalDate getDate() {
+        return date;
     }
 }

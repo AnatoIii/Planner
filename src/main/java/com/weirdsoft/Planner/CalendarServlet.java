@@ -6,9 +6,11 @@
 package com.weirdsoft.Planner;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import javax.servlet.RequestDispatcher;
 import java.time.YearMonth;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,28 +39,42 @@ public class CalendarServlet extends HttpServlet {
         days = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
         notes = new ArrayList<>();
-        Note note1 = new Note("Note 1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", "08:00");
-        Note note2 = new Note("Note 2", "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "10:00");
-        notes.add(note1);
-        notes.add(note2);
+        notes.add(new Note("Note 1",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                "08:00", LocalDate.of(2021, 3, 7)));
+        notes.add(new Note("Note 2",
+                "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                "10:00", LocalDate.of(2021, 3, 9)));
+        notes.add(new Note("Note 3",
+                "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                "10:00", LocalDate.of(2021, 3, 7)));
+        notes.add(new Note("Note 4",
+                "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                "10:00", LocalDate.of(2021, 3, 2)));
+        notes.add(new Note("Note 5",
+                "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                "10:00", LocalDate.of(2021, 3, 23)));
 
         calendar = new ArrayList<int[]>();
-        int dates[] = new int[7];
-        for (int i = 1; i <= month.length; i++) {
-            int dayOfWeek = date.atDay(i).getDayOfWeek().getValue();
-            dates[dayOfWeek - 1] = i;
-            if (dayOfWeek == 7 || i == month.length) {
-                calendar.add(dates);
-                dates = new int[7];
-            }
-        }
+        setCalendar(date, month);
     }
 
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
+        YearMonth date;
+        if (request.getParameter("year") == null || request.getParameter("month") == null) {
+            date = YearMonth.now();
+        } else {
+            int yearParam = Integer.parseInt(request.getParameter("year"));
+            int monthParam = Integer.parseInt(request.getParameter("month"));
+            date = YearMonth.of(yearParam, monthParam);
+        }
 
+        month = new Month(date);
+        setCalendar(date, month);
+
+        response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
         request.setAttribute("month", month);
         request.setAttribute("calendar", calendar);
         request.setAttribute("days", days);
@@ -72,5 +88,18 @@ public class CalendarServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void setCalendar(YearMonth date, Month month) {
+        calendar.clear();
+        int dates[] = new int[7];
+        for (int i = 1; i <= month.length; i++) {
+            int dayOfWeek = date.atDay(i).getDayOfWeek().getValue();
+            dates[dayOfWeek - 1] = i;
+            if (dayOfWeek == 7 || i == month.length) {
+                calendar.add(dates);
+                dates = new int[7];
+            }
+        }
+    }
 
 }
