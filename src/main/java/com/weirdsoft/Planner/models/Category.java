@@ -3,24 +3,24 @@ package com.weirdsoft.Planner.models;
 import java.util.UUID;
 
 public class Category {
-    private UUID userId;
+    private UUID id;
     private String name;
     private String color;
 
-    public Category(UUID userId, String name, String color) {
-        this.userId = userId;
+    public Category(UUID id, String name, String color) {
+        this.id = id;
         this.name = name;
         this.color = color;
     }
 
     public Category(){}
 
-    public UUID getUserId() {
-        return userId;
+    public UUID getId() {
+        return id;
     }
 
-    public void setUserId(UUID userId) {
-        this.userId = userId;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getName() {

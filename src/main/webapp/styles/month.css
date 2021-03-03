@@ -62,11 +62,6 @@ td:hover {
     background-color: #f3f6f7;
 }
 
-.hint {
-    text-align: center;
-    color: grey;
-}
-
 .note p {
     margin: 3px;
 }
@@ -89,20 +84,7 @@ td:hover {
     padding-right: 5px; 
 }
 
-.right-side .note {
-    margin: 15px;
-    background: white;
-    padding: 10px;
-}
-
-.right-side .time{
-    font-size: 15px;
-}
-
-.right-side .name{
-    font-size: 17px;
-}
-
-.desc {
-    margin-top: 8px;
+a {
+    color: black;
+    text-decoration: none;
 }

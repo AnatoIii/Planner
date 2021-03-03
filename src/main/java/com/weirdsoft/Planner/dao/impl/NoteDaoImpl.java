@@ -19,6 +19,7 @@ import java.util.UUID;
 @RequestScoped
 public class NoteDaoImpl implements NoteDao {
     private static final String getByIdSql = "select noteId, name, description, dateTime, creatorId from Notes where noteId = ?";
+    private static final String getAllByDateAndUser = "select noteId, name, description, dateTime, creatorId from Notes where dateTime = ? AND creatorId = ?";
     private static final String deleteByIdSql = "delete from Notes where noteid = ? RETURNING noteid ";
     private static final String createSql = "insert into Notes(noteId, name, description, dateTime, creatorId) VALUES (?, ?, ?, ?, ?) RETURNING noteId";
     private static final String updateSql = "update notes set name=?, description=? WHERE noteid=? RETURNING noteid";
@@ -43,12 +44,8 @@ public class NoteDaoImpl implements NoteDao {
                 ps.setString(1,newId.toString());
                 ps.setString(2,object.getName());
                 ps.setString(3,object.getDescription());
-                ps.setTimestamp(4,new Timestamp(object.getDateTime().getTime()));
-                String creatorId = null;
-                if(object.getCreatorId() != null){
-                    creatorId = object.getCreatorId().toString();
-                }
-                ps.setString(5,creatorId);
+                ps.setTimestamp(4, new Timestamp(object.getDateTime().getTime()));
+                ps.setString(5, object.getCreatorId().toString());
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
@@ -89,6 +86,18 @@ public class NoteDaoImpl implements NoteDao {
                 ps.setTimestamp(2, new Timestamp(date.getYear(),date.getMonth() + 1,1,0,0,0,0));
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
+            }
+        });
+    }
+
+    @Override
+    public List<Note> getByDate(Date date, UUID userId) {
+         return DaoUtils.executeAndMap(getAllByDateAndUser, NoteMapper::mapNotes, (ps) -> {
+            try {
+                ps.setString(1, date.toString());
+                ps.setString(2, userId.toString());
+            } catch (Exception e) {
+
             }
         });
     }

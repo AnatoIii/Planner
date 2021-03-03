@@ -13,7 +13,7 @@ public class UserMapper {
         try {
             if(rs.next()){
                 user = new User();
-                user.setUserId(UUID.fromString(rs.getString("userId")));
+                user.setUserId(UUID.fromString(rs.getString("id")));
                 user.setName(rs.getString("name"));
                 user.setLogin(rs.getString("login"));
                 user.setPasswordHash(rs.getString("passwordHash"));

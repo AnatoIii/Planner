@@ -3,6 +3,7 @@
     Created on : Feb 17, 2021, 9:05:09 PM
     Author     : kater
 --%>
+<%@page import="com.weirdsoft.Planner.Month"%>
 <%@page import="java.util.stream.Stream"%>
 <%@page import="java.util.stream.Collectors"%>
 <%@page import="java.util.stream.StreamSupport"%>
@@ -16,6 +17,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
         <link href="./styles/month.css" rel="stylesheet" type="text/css">
+        <jsp:include page="/Components/LinkRel.jsp"/>
         <title>Month | Planner</title>
         <script>
             function onChangeDate(e)
@@ -29,6 +31,7 @@
         </script>
     </head>
     <body>
+        <jsp:include page="/Components/Header.jsp"/>
         <div class="wrapper">
             <div class="top">
                 <h1 class="month-title">${month.getDisplayText()}</h1>
@@ -50,40 +53,34 @@
                         <c:forEach begin="0" end="6" var="j"> 
                             <td class="day">
                                 <c:if test="${week[j] != '0'}">
-                                    <div class="day-number">
-                                        <c:out value="${week[j]}" />
-                                    </div>
-                                </c:if>
-                                
-                                <c:forEach items="${notes}" var="note">
-                                    <c:if test="${week[j] == note.date.getDayOfMonth()}">
-                                        <div class="note">
-                                            <p>
-                                                <span class="time">${note.time}</span> -
-                                                <span class="name">${note.name}</span>
-                                            </P>
+                                    <%
+                                        String date = ((Month) request.getAttribute("month")).getValueForInput();
+                                    %>
+                                    <a href="${pageContext.request.contextPath}/day?date=<%=date%>-${String.format("%02d", week[j])}">
+                                        <div style="height:100%;width:100%">
+
+                                            <div class="day-number">
+                                                <c:out value="${week[j]}" />
+                                            </div>
+
+                                            <c:forEach items="${notes}" var="note">
+                                                <c:if test="${week[j] == note.date.getDayOfMonth()}">
+                                                    <div class="note">
+                                                        <p>
+                                                            <span class="time">${note.time}</span> -
+                                                            <span class="name">${note.name}</span>
+                                                        </P>
+                                                    </div>
+                                                </c:if>
+                                            </c:forEach>
                                         </div>
-                                    </c:if>
-                                </c:forEach>
+                                    </a>
+                                </c:if>
                             </td>
                         </c:forEach>
                     </tr>
                 </c:forEach>
             </table>  
-            <!--            <div class="right-side">
-                            <p class="hint">
-                                You chosen Monday
-                            </p>
-            <c:forEach items="${notes}" var="note">
-                <div class="note">
-                    <p>
-                        <span class="time">${note.time}</span> -
-                        <span class="name">${note.name}</span>
-                    </P>
-                    <p class="desc">${note.description}</P>
-                </div>
-            </c:forEach>
-        </div>-->
         </div>
     </body>
 </html>

@@ -44,16 +44,15 @@ public class LoginServlet extends HttpServlet {
         
         User loginResult = userService.Login(email, password);
         
-        String destPage = "Auth/Success.jsp";
         if (loginResult == null) {
-            destPage = "Auth/Login.jsp";
             request.setAttribute("error", "Incorrect email / password");
+            RequestDispatcher view = request.getRequestDispatcher("Auth/Login.jsp");
+            view.forward(request, response);
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("user", loginResult);
+            
+            response.sendRedirect("/month");
         }
-        
-        RequestDispatcher view = request.getRequestDispatcher(destPage);
-        view.forward(request, response);
     }
 }

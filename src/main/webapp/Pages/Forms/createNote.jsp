@@ -11,9 +11,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <link href="/styles/createNote.css" rel="stylesheet" type="text/css">
+        <jsp:include page="/Components/LinkRel.jsp"/>
         <title>New Note | Planner</title>
     </head>
     <body>
+        <jsp:include page="/Components/Header.jsp"/>
         <div class="container">
             <div class="content">
                 <h2>Create new note</h2>
@@ -24,7 +26,7 @@
                     </div>
                     <div class="input">
                         <div class="label">Time</div>
-                        <input id="time" name="time" type="time">
+                        <input id="time" name="time" type="time" required>
                     </div>
                     <div class="input">
                         <div class="label">Date</div>
@@ -34,7 +36,7 @@
                         <div class="label">Category</div>
                         <select id="categoryId" name="categoryId" required>
                             <c:forEach items="${categories}" var="category">
-                                <option value="${category.categoryId}">
+                                <option value="${category.id}">
                                     ${category.name}
                                 </option>
                             </c:forEach>

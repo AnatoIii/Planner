@@ -8,7 +8,8 @@ public class NoteTO {
     private String name;
     private String description;
     private Date dateTime;
-
+    private UUID creatorId;
+    
     public NoteTO() {
     }
 
@@ -19,6 +20,14 @@ public class NoteTO {
         this.dateTime = dateTime;
     }
 
+    public UUID getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(UUID creatorId) {
+        this.creatorId = creatorId;
+    }
+    
     public UUID getNoteId() {
         return noteId;
     }

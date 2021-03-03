@@ -38,22 +38,22 @@ public class RegisterServlet extends HttpServlet {
                 
         request.setAttribute("error", "");
         String email = request.getParameter("email");
-        String name = request.getParameter("password");
+        String name = request.getParameter("name");
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
         
-        String destPage = "Pages/month.jsp";
+        String destPage = "/month";
         if (!password.equals(confirmPassword)) {
-            destPage = "Auth/Register.jsp";
+            destPage = "/register";
             request.setAttribute("error", "Passwords wasn't the same");
         } else {
             User user = registerUser(email, name, password);
             if (user == null) {
-                destPage = "Auth/Register.jsp";
+                destPage = "/register";
                 request.setAttribute("error", "User with such email exists");
             } else {
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user);
+                HttpSession session = request.getSession();        
+                session.setAttribute("user", user);
             }
         }
         

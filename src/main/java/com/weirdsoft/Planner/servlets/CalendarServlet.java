@@ -12,6 +12,7 @@ import com.weirdsoft.Planner.models.dtos.NoteTO;
 import com.weirdsoft.Planner.services.NoteService;
 import com.weirdsoft.Planner.services.impl.NoteServiceImpl;
 
+import com.weirdsoft.Planner.models.User;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -81,6 +82,7 @@ public class CalendarServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         YearMonth date;
+        User user = (User)request.getSession().getAttribute("user");
         if (request.getParameter("year") == null || request.getParameter("month") == null) {
             date = YearMonth.now();
         } else {
