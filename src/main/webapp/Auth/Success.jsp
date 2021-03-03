@@ -9,6 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+        <jsp:include page="/Components/LinkRel.jsp"/>
         <title>Success | Planner</title>
     </head>
     <body>

@@ -38,7 +38,7 @@ public class RegisterServlet extends HttpServlet {
                 
         request.setAttribute("error", "");
         String email = request.getParameter("email");
-        String name = request.getParameter("password");
+        String name = request.getParameter("name");
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
         

@@ -6,6 +6,8 @@ import com.weirdsoft.Planner.models.dtos.NoteTO;
 import com.weirdsoft.Planner.services.NoteService;
 import com.weirdsoft.Planner.services.impl.NoteServiceImpl;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
@@ -22,8 +24,7 @@ import java.util.UUID;
 
 @WebServlet(name = "noteServlet", value = "/note-servlet")
 public class NoteServlet extends HttpServlet {
-    private final NoteService noteService;
-
+    private NoteService noteService;
     public NoteServlet(){
         NoteDao dao = new NoteDaoImpl();
         noteService = new NoteServiceImpl(dao);

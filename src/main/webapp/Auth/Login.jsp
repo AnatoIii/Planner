@@ -13,6 +13,7 @@
             <%@include file="/styles.css"%>
         </style>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+        <jsp:include page="/Components/LinkRel.jsp"/>
         <title>Login | Planner</title>
     </head>
     <body>
@@ -28,11 +29,11 @@
                     <form class="flex-center flex-column" [formGroup]="loginForm" action="login" method="POST">
                         <div class="email">
                             <div class="label"><label for="email">Email</label></div>
-                            <input id="email" name="email" type="text" placeholder="Enter email">
+                            <input id="email" name="email" type="text" placeholder="Enter email" required minlength="4">
                         </div>
                         <div class="password">
                             <div class="label">Password</div>
-                            <input id="password" name="password" type="password" placeholder="Enter password">
+                            <input id="password" name="password" type="password" placeholder="Enter password" required minlength="4">
                         </div>
                         <div class="error">
                             <%= request.getAttribute("error") != null ? request.getAttribute("error") : "" %>
