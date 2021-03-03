@@ -42,7 +42,7 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
         
-        String destPage = "Auth/Success.jsp";
+        String destPage = "Pages/month.jsp";
         if (!password.equals(confirmPassword)) {
             destPage = "Auth/Register.jsp";
             request.setAttribute("error", "Passwords wasn't the same");

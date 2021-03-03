@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.weirdsoft.Planner;
+package com.weirdsoft.Planner.servlets;
 
+import com.weirdsoft.Planner.Month;
+import com.weirdsoft.Planner.Note;
 import java.io.IOException;
 import java.time.LocalDate;
 import javax.servlet.RequestDispatcher;
@@ -92,10 +94,10 @@ public class CalendarServlet extends HttpServlet {
     private void setCalendar(YearMonth date, Month month) {
         calendar.clear();
         int dates[] = new int[7];
-        for (int i = 1; i <= month.length; i++) {
+        for (int i = 1; i <= month.getLength(); i++) {
             int dayOfWeek = date.atDay(i).getDayOfWeek().getValue();
             dates[dayOfWeek - 1] = i;
-            if (dayOfWeek == 7 || i == month.length) {
+            if (dayOfWeek == 7 || i == month.getLength()) {
                 calendar.add(dates);
                 dates = new int[7];
             }

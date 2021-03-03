@@ -8,7 +8,7 @@
 <%@page import="java.util.stream.StreamSupport"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="windows-1251"%>
 <%@page import="com.weirdsoft.Planner.Note"%>
 <!DOCTYPE html>
@@ -16,8 +16,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
         <link href="./styles/month.css" rel="stylesheet" type="text/css">
-        <title>Month page</title>
-
+        <title>Month | Planner</title>
         <script>
             function onChangeDate(e)
             {
@@ -81,7 +80,7 @@
                         <span class="time">${note.time}</span> -
                         <span class="name">${note.name}</span>
                     </P>
-                    <p class="descr">${note.description}</P>
+                    <p class="desc">${note.description}</P>
                 </div>
             </c:forEach>
         </div>-->

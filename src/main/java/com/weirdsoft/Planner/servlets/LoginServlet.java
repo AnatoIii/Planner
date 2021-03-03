@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
         
         request.setAttribute("error", "");
         
-        RequestDispatcher view = request.getRequestDispatcher("Auth/Login.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("Pages/month.jsp");
         view.forward(request, response);
     }
     
