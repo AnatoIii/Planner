@@ -4,7 +4,7 @@
     Author     : anatolii
 --%>
 
-<%@page contentType="text/html" pageEncoding="windows-1252"%>
+<%@page contentType="text/html" pageEncoding="windows-1252" session="false"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -54,7 +54,7 @@
             </div>
 
             <div class="toRegister">
-                <a href="/login">Already have an account? Login</a>
+                <a href="/">Already have an account? Login</a>
             </div>
         </div>
     </body>

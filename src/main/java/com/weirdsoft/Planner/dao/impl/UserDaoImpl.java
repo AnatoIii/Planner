@@ -10,11 +10,11 @@ import java.sql.Timestamp;
 import java.util.UUID;
 
 public class UserDaoImpl implements UserDao {
-    private static final String getByIdSql = "select userid, name, login, passwordHash, salt from Users where userId = ?";
-    private static final String getByLoginSql = "select userid, name, login, passwordHash, salt from Users where login = ?";
-    private static final String deleteByIdSql = "delete from Users where userId = ? RETURNING userId ";
-    private static final String createSql = "insert into Users(userId, name, login, passwordHash, salt) VALUES (?, ?, ?, ?, ?) RETURNING userId";
-    private static final String updateSql = "update Users set salt=? WHERE userId=? RETURNING userId";
+    private static final String getByIdSql = "select id, name, login, passwordHash, salt from Users where id = ?";
+    private static final String getByLoginSql = "select id, name, login, passwordHash, salt from Users where login = ?";
+    private static final String deleteByIdSql = "delete from Users where id = ? RETURNING id";
+    private static final String createSql = "insert into Users(id, name, login, passwordHash, salt) VALUES (?, ?, ?, ?, ?) RETURNING id";
+    private static final String updateSql = "update Users set salt=? WHERE userId=? RETURNING id";
     
     @Override
     public User find(UUID id) {

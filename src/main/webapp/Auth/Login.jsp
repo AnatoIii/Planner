@@ -4,7 +4,7 @@
     Author     : anatolii
 --%>
 
-<%@page contentType="text/html" pageEncoding="windows-1252"%>
+<%@page contentType="text/html" pageEncoding="windows-1252" session="false"%>
 <!DOCTYPE html>
 <html>
     <head>

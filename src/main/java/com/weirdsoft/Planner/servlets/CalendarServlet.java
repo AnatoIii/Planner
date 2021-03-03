@@ -7,6 +7,7 @@ package com.weirdsoft.Planner.servlets;
 
 import com.weirdsoft.Planner.Month;
 import com.weirdsoft.Planner.Note;
+import com.weirdsoft.Planner.models.User;
 import java.io.IOException;
 import java.time.LocalDate;
 import javax.servlet.RequestDispatcher;
@@ -65,6 +66,7 @@ public class CalendarServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         YearMonth date;
+        User user = (User)request.getSession().getAttribute("user");
         if (request.getParameter("year") == null || request.getParameter("month") == null) {
             date = YearMonth.now();
         } else {

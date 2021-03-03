@@ -30,6 +30,7 @@
         </script>
     </head>
     <body>
+        <jsp:include page="/Components/Header.jsp"/>
         <div class="wrapper">
             <div class="top">
                 <h1 class="month-title">${month.getDisplayText()}</h1>
