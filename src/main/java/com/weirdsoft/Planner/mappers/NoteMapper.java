@@ -5,6 +5,7 @@ import com.weirdsoft.Planner.models.Note;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,8 +16,9 @@ public class NoteMapper {
             if(rs.next()){
                 note = new Note();
                 note.setNoteId(UUID.fromString(rs.getString("noteId")));
-                note.setCreatorId(UUID.fromString(rs.getString("creatorId")));
-                note.setDateTime(rs.getDate("dateTime"));
+                String creatorId = rs.getString("creatorId");
+                note.setCreatorId(creatorId != null ? UUID.fromString(creatorId) : null);
+                note.setDateTime(new Date(rs.getTimestamp("dateTime").getTime()));
                 note.setDescription(rs.getString("description"));
                 note.setName(rs.getString("name"));
             }
@@ -32,8 +34,9 @@ public class NoteMapper {
         while(rs.next()){
             Note note = new Note();
             note.setNoteId(UUID.fromString(rs.getString("noteId")));
-            note.setCreatorId(UUID.fromString(rs.getString("creatorId")));
-            note.setDateTime(rs.getDate("dateTime"));
+            String creatorId = rs.getString("creatorId");
+            note.setCreatorId(creatorId != null ? UUID.fromString(creatorId) : null);
+            note.setDateTime(new Date(rs.getTimestamp("dateTime").getTime()));
             note.setDescription(rs.getString("description"));
             note.setName(rs.getString("name"));
             notes.add(note);

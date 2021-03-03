@@ -10,7 +10,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="windows-1251"%>
-<%@page import="com.weirdsoft.Planner.Note"%>
+<%@page import="com.weirdsoft.Planner.servlets.CalendarServlet.CalendarNote"%>
 <!DOCTYPE html>
 <html>
     <head>

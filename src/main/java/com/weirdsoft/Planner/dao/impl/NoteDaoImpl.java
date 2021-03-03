@@ -11,6 +11,8 @@ import javax.inject.Named;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Named
@@ -20,6 +22,7 @@ public class NoteDaoImpl implements NoteDao {
     private static final String deleteByIdSql = "delete from Notes where noteid = ? RETURNING noteid ";
     private static final String createSql = "insert into Notes(noteId, name, description, dateTime, creatorId) VALUES (?, ?, ?, ?, ?) RETURNING noteId";
     private static final String updateSql = "update notes set name=?, description=? WHERE noteid=? RETURNING noteid";
+    private static final String getByMonth = "select noteId, name, description, dateTime, creatorId from Notes where dateTime >= ? AND dateTime < ?";
 
     @Override
     public Note find(UUID id) {
@@ -72,6 +75,18 @@ public class NoteDaoImpl implements NoteDao {
                 ps.setString(1, object.getName());
                 ps.setString(2, object.getDescription());
                 ps.setString(3, object.getNoteId().toString());
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        });
+    }
+
+    @Override
+    public List<Note> getByMonth(Date date) {
+        return DaoUtils.executeAndMap(getByMonth,NoteMapper::mapNotes,(ps) -> {
+            try {
+                ps.setTimestamp(1, new Timestamp(date.getYear(),date.getMonth(),1,0,0,0,0));
+                ps.setTimestamp(2, new Timestamp(date.getYear(),date.getMonth() + 1,1,0,0,0,0));
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }

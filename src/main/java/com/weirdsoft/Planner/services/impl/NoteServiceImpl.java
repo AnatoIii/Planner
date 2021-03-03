@@ -6,13 +6,18 @@ import com.weirdsoft.Planner.models.Note;
 import com.weirdsoft.Planner.models.dtos.NoteTO;
 import com.weirdsoft.Planner.services.NoteService;
 
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.transaction.Transactional;
 import javax.ws.rs.ext.Provider;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
+@Named("noteService")
 public class NoteServiceImpl implements NoteService {
     private NoteDao noteDao;
 
@@ -37,7 +42,7 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public List<NoteTO> getByMonth(Date date) {
-        return null;
+        return noteDao.getByMonth(date).stream().map(NoteServiceImpl::convert2TO).collect(Collectors.toList());
     }
 
     @Override
