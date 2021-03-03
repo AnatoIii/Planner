@@ -12,6 +12,7 @@ import javax.ws.rs.ext.Provider;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class NoteServiceImpl implements NoteService {
     private NoteDao noteDao;
@@ -31,8 +32,8 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
-    public List<NoteTO> getByDate(Date date) {
-        return null;
+    public List<NoteTO> getByDate(Date date, UUID userId) {
+        return noteDao.getByDate(date, userId).stream().map(n -> convert2TO(n)).collect(Collectors.toList());
     }
 
     @Override
@@ -72,6 +73,7 @@ public class NoteServiceImpl implements NoteService {
         note.setName(noteTO.getName());
         note.setDescription(noteTO.getDescription());
         note.setDateTime(noteTO.getDateTime());
+        note.setCreatorId(noteTO.getCreatorId());
         return note;
     }
 }

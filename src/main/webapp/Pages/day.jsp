@@ -13,9 +13,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
         <link href="./styles/day.css" rel="stylesheet" type="text/css">
+        <jsp:include page="/Components/LinkRel.jsp"/>
         <title>Day | Planner</title>
     </head>
     <body>
+        <jsp:include page="/Components/Header.jsp"/>
         <div class="wrapper">
             <div class="top">
                 <h1>${date}</h1>
@@ -34,7 +36,7 @@
                         </P>
                         <p class="desc">${note.description}</P>
                     <div class="menu">
-                        <a href="${pageContext.request.contextPath}/edit">Edit</a>
+                        <!-- <a href="${pageContext.request.contextPath}/edit">Edit</a> -->
                         <a href="${pageContext.request.contextPath}/delete">Delete</a>
                     </div>
                 </div>

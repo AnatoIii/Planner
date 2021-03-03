@@ -6,10 +6,17 @@
 package com.weirdsoft.Planner.servlets;
 
 import com.weirdsoft.Planner.Note;
+import com.weirdsoft.Planner.dao.NoteDao;
+import com.weirdsoft.Planner.dao.impl.NoteDaoImpl;
+import com.weirdsoft.Planner.models.User;
+import com.weirdsoft.Planner.models.dtos.NoteTO;
+import com.weirdsoft.Planner.services.NoteService;
+import com.weirdsoft.Planner.services.impl.NoteServiceImpl;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import javax.servlet.RequestDispatcher;
@@ -25,7 +32,14 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Day", value = "/day")
 public class DayServlet extends HttpServlet {
+    private final NoteService noteService;
 
+    public DayServlet(){
+        NoteDao noteDao = new NoteDaoImpl();
+        noteService = new NoteServiceImpl(noteDao);
+    }
+    
+    
     List<Note> notes;
 
     @Override
@@ -48,23 +62,21 @@ public class DayServlet extends HttpServlet {
                 "15:00", LocalDate.of(2021, 3, 23)));
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         LocalDate date;
                 response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
+                
+        User user = (User)request.getSession().getAttribute("user");
+         
         if (request.getParameter("date") != null) {
             date = LocalDate.parse(request.getParameter("date"));
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy").withLocale(new Locale("en"));
+            
+            Date dateTime = java.sql.Date.valueOf(date);
+            List<NoteTO> notesList = noteService.getByDate(dateTime, user.getUserId());
+            
             request.setAttribute("date", formatter.format(date));
         }
 
@@ -74,24 +86,11 @@ public class DayServlet extends HttpServlet {
         view.forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
