@@ -1,12 +1,14 @@
 package com.weirdsoft.Planner.services.impl;
 
 import com.weirdsoft.Planner.dao.NoteDao;
+import com.weirdsoft.Planner.exceptions.NotFoundException;
 import com.weirdsoft.Planner.models.Note;
 import com.weirdsoft.Planner.models.dtos.NoteTO;
 import com.weirdsoft.Planner.services.NoteService;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import javax.ws.rs.ext.Provider;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -20,7 +22,11 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
-    public NoteTO getById(UUID id) {
+    public NoteTO getById(UUID id) throws NotFoundException {
+        Note note = noteDao.find(id);
+        if(note == null){
+            throw new NotFoundException();
+        }
         return convert2TO(noteDao.find(id));
     }
 

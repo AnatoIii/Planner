@@ -5,11 +5,16 @@ import com.weirdsoft.Planner.dao.NoteDao;
 import com.weirdsoft.Planner.mappers.NoteMapper;
 import com.weirdsoft.Planner.models.Note;
 
+import javax.annotation.ManagedBean;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.UUID;
 
+@Named
+@RequestScoped
 public class NoteDaoImpl implements NoteDao {
     private static final String getByIdSql = "select noteId, name, description, dateTime, creatorId from Notes where noteId = ?";
     private static final String deleteByIdSql = "delete from Notes where noteid = ? RETURNING noteid ";
