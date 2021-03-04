@@ -38,7 +38,7 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     @Override
-    public UUID delete(UUID id) {
+    public UUID delete(UUID id, UUID userId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

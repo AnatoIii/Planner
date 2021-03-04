@@ -46,7 +46,6 @@ public class CalendarServlet extends HttpServlet {
     Month month;
     String[] months;
     String[] days;
-    List<CalendarNote> notes;
     ArrayList<int[]> calendar;
     DateFormat timeFormat = new SimpleDateFormat("HH:mm");
 
@@ -56,24 +55,7 @@ public class CalendarServlet extends HttpServlet {
         month = new Month(date);
 
         days = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-
-        notes = new ArrayList<>();
-        notes.add(new CalendarNote("Note 1",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                "08:00", LocalDate.of(2021, 3, 7)));
-        notes.add(new CalendarNote("Note 2",
-                "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                "10:00", LocalDate.of(2021, 3, 9)));
-        notes.add(new CalendarNote("Note 3",
-                "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                "10:00", LocalDate.of(2021, 3, 7)));
-        notes.add(new CalendarNote("Note 4",
-                "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                "10:00", LocalDate.of(2021, 3, 2)));
-        notes.add(new CalendarNote("Note 5",
-                "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                "10:00", LocalDate.of(2021, 3, 23)));
-
+        
         calendar = new ArrayList<int[]>();
         setCalendar(date, month);
     }
@@ -94,8 +76,8 @@ public class CalendarServlet extends HttpServlet {
         month = new Month(date);
         setCalendar(date, month);
 
-        List<NoteTO> newNotes = noteService.getByMonth(Date.from(date.atDay(1).atStartOfDay(ZoneId.systemDefault()).toInstant()));
-        notes = newNotes.stream().map(this::mapNoteTO2CalendarNote).collect(Collectors.toList());
+        List<NoteTO> newNotes = noteService.getByMonth(Date.from(date.atDay(1).atStartOfDay(ZoneId.systemDefault()).toInstant()), user.getUserId());
+        List<CalendarNote> notes = newNotes.stream().map(this::mapNoteTO2CalendarNote).collect(Collectors.toList());
 
         response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
         request.setAttribute("month", month);
@@ -126,7 +108,7 @@ public class CalendarServlet extends HttpServlet {
     }
 
     private CalendarNote mapNoteTO2CalendarNote(NoteTO note){
-        return new CalendarNote(note.getName(),note.getDescription(),
+        return new CalendarNote(note.getNoteId().toString(), note.getName(),note.getDescription(),
                 timeFormat.format(note.getDateTime()),
                 note.getDateTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
     }
@@ -139,7 +121,8 @@ public class CalendarServlet extends HttpServlet {
         LocalDate date;
         String creatorId;
 
-        public CalendarNote(String noteName, String noteDescription, String noteTime, LocalDate noteDate) {
+        public CalendarNote(String id, String noteName, String noteDescription, String noteTime, LocalDate noteDate) {
+            this.id = id;
             name = noteName;
             description = noteDescription;
             time = noteTime;

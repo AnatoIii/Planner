@@ -15,6 +15,16 @@
         <link href="./styles/day.css" rel="stylesheet" type="text/css">
         <jsp:include page="/Components/LinkRel.jsp"/>
         <title>Day | Planner</title>
+        <script>
+            function deleteNote(noteId) {
+                console.log({ noteId });
+                
+                const http = new XMLHttpRequest();
+                http.open("POST", "/day" + window.location.search + "&noteId=" + noteId);
+                http.send({});
+                setTimeout(() => location.reload(), 1000);
+            }
+        </script>
     </head>
     <body>
         <jsp:include page="/Components/Header.jsp"/>
@@ -37,7 +47,7 @@
                         <p class="desc">${note.description}</P>
                     <div class="menu">
                         <!-- <a href="${pageContext.request.contextPath}/edit">Edit</a> -->
-                        <a href="${pageContext.request.contextPath}/delete">Delete</a>
+                        <a onclick="deleteNote('${note.id}')">Delete</a>
                     </div>
                 </div>
             </c:forEach>

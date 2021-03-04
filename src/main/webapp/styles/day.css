@@ -72,9 +72,11 @@ a {
     padding: 3px 7px;
     margin: 16px 0px;
     border: 1px solid transparent;
+    cursor: pointer;
 }
 
 a:hover {
     border: 1px solid black;
+    border-radius: 3px;
 }
 

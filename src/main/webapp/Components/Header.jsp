@@ -9,6 +9,9 @@
     
 <c:if test="${userName != null}">
     <div class="header">
+        <div class="icon">
+            <a href="/month"><img src="/favicon.png" height="20px"></a>
+        </div>
         <div class="username">
             <div>
                 <c:out value="${userName}" />
@@ -35,7 +38,11 @@
         padding: 10px 0;
         margin-bottom: -10px;
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
+    }
+    
+    .header .icon {
+        margin-left: 60px;
     }
     
     .header .username {

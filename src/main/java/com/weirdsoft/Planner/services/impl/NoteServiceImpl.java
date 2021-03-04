@@ -37,12 +37,15 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public List<NoteTO> getByDate(Date date, UUID userId) {
-        return noteDao.getByDate(date, userId).stream().map(n -> convert2TO(n)).collect(Collectors.toList());
+        return noteDao.getByDate(date, userId)
+                .stream()
+                .map(n -> convert2TO(n))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<NoteTO> getByMonth(Date date) {
-        return noteDao.getByMonth(date).stream().map(NoteServiceImpl::convert2TO).collect(Collectors.toList());
+    public List<NoteTO> getByMonth(Date date, UUID userId) {
+        return noteDao.getByMonth(date, userId).stream().map(NoteServiceImpl::convert2TO).collect(Collectors.toList());
     }
 
     @Override
@@ -53,8 +56,8 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
-    public UUID deleteNote(UUID id) {
-        return noteDao.delete(id);
+    public UUID deleteNote(UUID id, UUID userId) {
+        return noteDao.delete(id, userId);
     }
 
     @Override

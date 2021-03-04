@@ -49,6 +49,7 @@
     max-height: 300px;
     resize: vertical;
     background: none;
+    padding: 5px;
 }
 
 .content form button[type="submit"] {

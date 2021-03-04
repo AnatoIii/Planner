@@ -56,7 +56,7 @@ public class NoteServlet extends HttpServlet {
         String id = request.getParameter("noteId");
         UUID uuid = UUID.fromString(id);
         PrintWriter out = response.getWriter();
-        out.println(noteService.deleteNote(uuid));
+        //out.println(noteService.deleteNote(uuid));
     }
     
     @Override

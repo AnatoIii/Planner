@@ -9,5 +9,5 @@ import java.util.UUID;
 
 public interface NoteDao extends GenericDao<Note>{
     List<Note> getByDate(Date date, UUID userId);
-    List<Note> getByMonth(Date date);
+    List<Note> getByMonth(Date date, UUID userId);
 }

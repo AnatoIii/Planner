@@ -34,7 +34,10 @@
         <jsp:include page="/Components/Header.jsp"/>
         <div class="wrapper">
             <div class="top">
-                <h1 class="month-title">${month.getDisplayText()}</h1>
+                <div>
+                    <h1 class="month-title">${month.getDisplayText()}</h1>
+                    <a href="${pageContext.request.contextPath}/create">Add</a>
+                </div>
                 <input type="month" id="start" name="date"
                        value="${month.getValueForInput()}" onchange="onChangeDate(event)"> 
             </div>

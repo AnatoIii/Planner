@@ -10,8 +10,8 @@ import java.util.UUID;
 public interface NoteService {
     NoteTO getById(UUID id) throws NotFoundException;
     List<NoteTO> getByDate(Date date, UUID userId);
-    List<NoteTO> getByMonth(Date date);
+    List<NoteTO> getByMonth(Date date, UUID userId);
     NoteTO createNote(NoteTO note);
-    UUID deleteNote(UUID id);
+    UUID deleteNote(UUID id, UUID userId);
     UUID updateNote(NoteTO note);
 }
