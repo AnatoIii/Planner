@@ -6,6 +6,10 @@ import com.weirdsoft.Planner.models.Note;
 import com.weirdsoft.Planner.models.dtos.NoteTO;
 import com.weirdsoft.Planner.services.NoteService;
 
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -17,7 +21,9 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@Named("noteService")
+//@Named("noteService")
+@Stateless(name = "noteService", mappedName = "noteService")
+@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 public class NoteServiceImpl implements NoteService {
     private NoteDao noteDao;
 

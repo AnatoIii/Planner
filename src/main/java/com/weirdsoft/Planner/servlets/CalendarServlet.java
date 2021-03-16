@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import java.time.YearMonth;
 import java.time.ZoneId;
@@ -36,11 +37,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Calendar", value = "/month")
 public class CalendarServlet extends HttpServlet {
+    @EJB(mappedName = "noteService")
     private NoteService noteService;
 
     public CalendarServlet(){
-        NoteDao dao = new NoteDaoImpl();
-        noteService = new NoteServiceImpl(dao);
     }
 
     Month month;

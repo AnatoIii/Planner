@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,12 +37,11 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Day", value = "/day")
 public class DayServlet extends HttpServlet {
-    private final NoteService noteService;
+    @EJB(mappedName = "noteService")
+    private NoteService noteService;
     DateFormat timeFormat = new SimpleDateFormat("HH:mm");
     
     public DayServlet(){
-        NoteDao noteDao = new NoteDaoImpl();
-        noteService = new NoteServiceImpl(noteDao);
     }
     
     @Override

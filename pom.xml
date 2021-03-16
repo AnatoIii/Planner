@@ -29,6 +29,17 @@
             <version>1</version>
         </dependency>
         <dependency>
+            <groupId>org.mvc-spec.ozark</groupId>
+            <artifactId>ozark-jersey</artifactId>
+            <version>1.0.0-m04</version>
+        </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>6.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>javax.mvc</groupId>
             <artifactId>javax.mvc-api</artifactId>
             <version>1.0.0</version>

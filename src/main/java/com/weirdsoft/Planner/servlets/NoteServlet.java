@@ -6,6 +6,7 @@ import com.weirdsoft.Planner.models.dtos.NoteTO;
 import com.weirdsoft.Planner.services.NoteService;
 import com.weirdsoft.Planner.services.impl.NoteServiceImpl;
 
+import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.json.Json;
@@ -24,10 +25,11 @@ import java.util.UUID;
 
 @WebServlet(name = "noteServlet", value = "/note-servlet")
 public class NoteServlet extends HttpServlet {
+    @EJB(mappedName = "noteService")
     private NoteService noteService;
     public NoteServlet(){
-        NoteDao dao = new NoteDaoImpl();
-        noteService = new NoteServiceImpl(dao);
+        //NoteDao dao = new NoteDaoImpl();
+        //noteService = new NoteServiceImpl(dao);
     }
     
     @Override

@@ -20,9 +20,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author anato
+ * @author anatoliko
  */
-@WebFilter(filterName = "userFilter", value = {"/*"})
+//@WebFilter(filterName = "userFilter", value = {"/*"})
 public class UserFilter implements Filter {
 
     

@@ -14,7 +14,9 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
+@Transactional(Transactional.TxType.REQUIRED)
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
 
