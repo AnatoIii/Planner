@@ -46,7 +46,7 @@
             </div>
 
             <div class="toRegister">
-                <a href="/register">Create an account</a>
+                <a href="register">Create an account</a>
             </div>
         </div>
     </body>

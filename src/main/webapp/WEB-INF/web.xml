@@ -9,13 +9,4 @@
         <error-code>404</error-code>
         <location>/error.html</location>
     </error-page>
-    <servlet>
-        <servlet-name>startupservlet</servlet-name>
-        <servlet-class>com.weirdsoft.Planner.servlets.StartupServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>startupservlet</servlet-name>
-        <url-pattern>/startup</url-pattern>
-    </servlet-mapping>
 </web-app>

@@ -54,7 +54,7 @@
             </div>
 
             <div class="toRegister">
-                <a href="/">Already have an account? Login</a>
+                <a href="/Planner">Already have an account? Login</a>
             </div>
         </div>
     </body>

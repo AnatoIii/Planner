@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author anatoliko
  */
-//@WebFilter(filterName = "userFilter", value = {"/*"})
+@WebFilter(filterName = "userFilter", value = {"/*"})
 public class UserFilter implements Filter {
 
     

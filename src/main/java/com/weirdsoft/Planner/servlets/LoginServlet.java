@@ -1,5 +1,6 @@
 package com.weirdsoft.Planner.servlets;
 
+import com.weirdsoft.Planner.Configuration;
 import com.weirdsoft.Planner.dao.UserDao;
 import com.weirdsoft.Planner.dao.impl.UserDaoImpl;
 import com.weirdsoft.Planner.models.User;
@@ -30,7 +31,7 @@ public class LoginServlet extends HttpServlet {
         
         request.setAttribute("error", "");
         
-        RequestDispatcher view = request.getRequestDispatcher("Pages/month.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("Auth/login.jsp");
         view.forward(request, response);
     }
     
@@ -51,8 +52,7 @@ public class LoginServlet extends HttpServlet {
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("user", loginResult);
-            
-            response.sendRedirect("/month");
+            response.sendRedirect(Configuration.GLASSFISH_ROUTE + "/month");
         }
     }
 }

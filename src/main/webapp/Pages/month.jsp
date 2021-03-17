@@ -31,7 +31,7 @@
         </script>
     </head>
     <body>
-        <jsp:include page="/Components/Header.jsp"/>
+        <jsp:include page="../Components/Header.jsp"/>
         <div class="wrapper">
             <div class="top">
                 <div>

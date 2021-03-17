@@ -4,7 +4,7 @@ import javax.servlet.Servlet;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 
-@WebServlet(name = "startupservlet", value = "/startup")
+@WebServlet(name = "startupservlet", value = "/startup", loadOnStartup = 1)
 public class StartupServlet extends HttpServlet {
     public StartupServlet(){
         try {

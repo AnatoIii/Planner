@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <link href="/styles/createNote.css" rel="stylesheet" type="text/css">
+        <link href="styles/createNote.css" rel="stylesheet" type="text/css">
         <jsp:include page="/Components/LinkRel.jsp"/>
         <title>New Note | Planner</title>
     </head>

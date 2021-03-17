@@ -5,6 +5,7 @@
  */
 package com.weirdsoft.Planner.filters;
 
+import com.weirdsoft.Planner.Configuration;
 import com.weirdsoft.Planner.models.User;
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author anatoliko
  */
-//@WebFilter(filterName = "pageFilter", value = {"/*"})
+@WebFilter(filterName = "pageFilter", value = {"/*"})
 public class PageFilter implements Filter {
 
     
@@ -36,7 +37,10 @@ public class PageFilter implements Filter {
         
         String route = req.getRequestURL().toString();
         String path = getPath(route);
-        if (path.equals("/") || path.equals("/register") || path.equals("/login") || path.startsWith("/images")) {
+        if (path.equals(Configuration.GLASSFISH_ROUTE + "/")
+                || path.equals(Configuration.GLASSFISH_ROUTE + "/register") 
+                || path.equals(Configuration.GLASSFISH_ROUTE + "/login") 
+                || path.startsWith(Configuration.GLASSFISH_ROUTE + "/images")) {
             fc.doFilter(request, response);
         } else {
             HttpSession session = req.getSession();
@@ -49,7 +53,7 @@ public class PageFilter implements Filter {
                 fc.doFilter(request, response);
             } else {
                 HttpServletResponse httpResponse = (HttpServletResponse) response;
-                httpResponse.sendRedirect("/");
+                httpResponse.sendRedirect(Configuration.GLASSFISH_ROUTE + "/");
             }
 
         }
