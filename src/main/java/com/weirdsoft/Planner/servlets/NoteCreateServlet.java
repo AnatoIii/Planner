@@ -21,6 +21,7 @@ import java.util.Locale;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
@@ -29,14 +30,12 @@ import javax.servlet.annotation.*;
 @WebServlet(name = "NoteCreate", value = "/create")
 public class NoteCreateServlet extends HttpServlet {
     private final CategoryService categoryService;
-    private final NoteService noteService;
+    @EJB
+    private NoteService noteService;
 
     public NoteCreateServlet(){
         CategoryDao dao = new CategoryDaoImpl();
         categoryService = new CategoryServiceImpl(dao);
-        
-        NoteDao noteDao = new NoteDaoImpl();
-        noteService = new NoteServiceImpl(noteDao);
     }
     
     @Override
@@ -82,7 +81,7 @@ public class NoteCreateServlet extends HttpServlet {
         }
         NoteTO noteRes = noteService.createNote(note);
         
-        String destPage = "/month";
+        String destPage = "/Planner-1.0-SNAPSHOT/month";
         
         response.sendRedirect(destPage);
     }

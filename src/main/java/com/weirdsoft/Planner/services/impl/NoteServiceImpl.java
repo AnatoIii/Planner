@@ -2,14 +2,12 @@ package com.weirdsoft.Planner.services.impl;
 
 import com.weirdsoft.Planner.dao.NoteDao;
 import com.weirdsoft.Planner.exceptions.NotFoundException;
+import com.weirdsoft.Planner.jpa.NoteJPA;
 import com.weirdsoft.Planner.models.Note;
 import com.weirdsoft.Planner.models.dtos.NoteTO;
 import com.weirdsoft.Planner.services.NoteService;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
+import javax.ejb.*;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -21,11 +19,15 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-//@Named("noteService")
+
 @Stateless(name = "noteService", mappedName = "noteService")
-@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+@TransactionManagement(TransactionManagementType.CONTAINER)
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class NoteServiceImpl implements NoteService {
     private NoteDao noteDao;
+
+    @EJB
+    private NoteJPA noteJPA;
 
     @Inject
     public NoteServiceImpl(NoteDao noteDao) {
@@ -33,8 +35,9 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public NoteTO getById(UUID id) throws NotFoundException {
-        Note note = noteDao.find(id);
+        Note note = noteJPA.find(id);
         if(note == null){
             throw new NotFoundException();
         }
@@ -42,33 +45,35 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public List<NoteTO> getByDate(Date date, UUID userId) {
-        return noteDao.getByDate(date, userId)
+        return noteJPA.getByDate(date, userId)
                 .stream()
                 .map(n -> convert2TO(n))
                 .collect(Collectors.toList());
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public List<NoteTO> getByMonth(Date date, UUID userId) {
-        return noteDao.getByMonth(date, userId).stream().map(NoteServiceImpl::convert2TO).collect(Collectors.toList());
+        return noteJPA.getByMonth(date, userId).stream().map(NoteServiceImpl::convert2TO).collect(Collectors.toList());
     }
 
     @Override
     public NoteTO createNote(NoteTO noteTO) {
         Note note = convert2dao(noteTO);
-        Note newNote = noteDao.create(note);
+        Note newNote = noteJPA.create(note);
         return convert2TO(newNote);
     }
 
     @Override
     public UUID deleteNote(UUID id, UUID userId) {
-        return noteDao.delete(id, userId);
+        return noteJPA.delete(id, userId);
     }
 
     @Override
     public UUID updateNote(NoteTO note) {
-        return noteDao.update(convert2dao(note));
+        return noteJPA.update(convert2dao(note));
     }
 
     private static NoteTO convert2TO(Note note){

@@ -1,5 +1,8 @@
 package com.weirdsoft.Planner;
 
+import com.weirdsoft.Planner.jpa.NoteJPA;
+
+import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.mvc.Controller;
 import javax.mvc.Models;

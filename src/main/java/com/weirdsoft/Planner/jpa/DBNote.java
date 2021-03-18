@@ -1,29 +1,26 @@
-package com.weirdsoft.Planner.models;
-
-import com.weirdsoft.Planner.jpa.UuidConverter;
+package com.weirdsoft.Planner.jpa;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.UUID;
 
-//@Entity
-//@Table(name = "notes")
-public class Note {
-//    @Id
-//    @Column(name = "noteid")
-//    @GeneratedValue
-//    @Convert(converter = UuidConverter.class)
-    private UUID noteId;
-//    @Column(name = "name")
+@Entity
+@Table(name = "notes")
+public class DBNote {
+    @Id
+    @Column(name = "noteid")
+    private String noteId;
+    @Column(name = "name")
     private String name;
-//    @Column(name = "description")
+    @Column(name = "description")
     private String description;
-//    @Column(name = "datetime")
-    private Date dateTime;
-//    @Column(name = "creatorid")
-    private UUID creatorId;
+    @Column(name = "datetime")
+    private Timestamp dateTime;
+    @Column(name = "creatorid")
+    private String  creatorId;
 
-    public Note(UUID noteId, String name, String description, Date dateTime, UUID creatorId) {
+    public DBNote(String noteId, String name, String description, Timestamp dateTime, String creatorId) {
         this.noteId = noteId;
         this.name = name;
         this.description = description;
@@ -31,15 +28,15 @@ public class Note {
         this.creatorId = creatorId;
     }
 
-    public Note(){
+    public DBNote(){
 
     }
 
-    public UUID getNoteId() {
+    public String getNoteId() {
         return noteId;
     }
 
-    public void setNoteId(UUID noteId) {
+    public void setNoteId(String noteId) {
         this.noteId = noteId;
     }
 
@@ -59,19 +56,19 @@ public class Note {
         this.description = description;
     }
 
-    public Date getDateTime() {
+    public Timestamp getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(Date dateTime) {
+    public void setDateTime(Timestamp dateTime) {
         this.dateTime = dateTime;
     }
 
-    public UUID getCreatorId() {
+    public String getCreatorId() {
         return creatorId;
     }
 
-    public void setCreatorId(UUID creatorId) {
+    public void setCreatorId(String creatorId) {
         this.creatorId = creatorId;
     }
 }

@@ -10,7 +10,7 @@
 <c:if test="${userName != null}">
     <div class="header">
         <div class="icon">
-            <a href="/month"><img src="/favicon.png" height="20px"></a>
+            <a href="month"><img src="favicon.png" height="20px"></a>
         </div>
         <div class="username">
             <div>

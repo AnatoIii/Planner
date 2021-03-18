@@ -20,7 +20,7 @@
                 console.log({ noteId });
                 
                 const http = new XMLHttpRequest();
-                http.open("POST", "/Planner-1.0-SNAPSHOT/day" + window.location.search + "&noteId=" + noteId);
+                http.open("POST", "/day" + window.location.search + "&noteId=" + noteId);
                 http.send({});
                 setTimeout(() => location.reload(), 1000);
             }

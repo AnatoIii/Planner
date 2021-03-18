@@ -28,7 +28,7 @@ public class RegisterServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.setAttribute("error", "");
         
-        RequestDispatcher view = request.getRequestDispatcher("Auth/Register.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/Auth/Register.jsp");
         view.forward(request, response);
     }
 
